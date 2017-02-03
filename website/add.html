@@ -1,0 +1,99 @@
+<html>
+<head>
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link type="text/css" rel="stylesheet" href="assets/materialize/css/materialize.min.css"  media="screen,projection"/>
+  <link type="text/css" rel="stylesheet" href="assets/css/main.css"  media="screen,projection"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+</head>
+
+<body>
+  <nav id="head">
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo center">
+        <img id="logo" src="assets/images/hamburger.png" lass="brand-logo">
+      </a>
+      <ul class="left hide-on-med-and-down">
+      </ul>
+    </div>
+  </nav>
+  <nav id="banner">
+  </div>
+</nav>
+<div id="container">
+  <div id="create" class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="row">
+
+          <!-- TITRE DE LA RECETTE -->
+          <div class="input-field col s12">
+            <input id="name" type="text" class="validate">
+            <label for="name">Titre de la recette</label>
+          </div>
+
+          <!-- NOMBRE DE PERSONNES -->
+          <div class="input-field col s12">
+            <select id="nbr">
+              <option value="" disabled selected>Choisir</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+            </select>
+            <label>Nombre de personne</label>
+          </div>
+
+          <!-- CHOISIR LA CATEGORIE -->
+          <div class="input-field col s12">
+            <select id="category">
+              <option value="" disabled selected>Choisir</option>
+            </select>
+            <label>category</label>
+          </div>
+
+          <!-- INSTRUCTIONS -->
+          <div class="input-field col s12">
+            <textarea id="instruction" class="materialize-textarea"></textarea>
+            <label for="instruction">Instructions</label>
+          </div>
+
+          <!-- PHOTO -->
+          <div class="input-field col s12">
+            <div class="file-field input-field">
+              <div class="btn">
+                <span>File</span>
+                <input id="picture" type="file">
+              </div>
+              <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+              </div>
+            </div>
+          </div>
+
+          <!-- INGREDIENTS -->
+          <div class="input-field col s12" id="ingredients">
+            <div class="row">
+              <ul class="collection with-header col s12">
+                <li class="collection-header"><h4>Ingredients</h4></li>
+                <i class="material-icons plus">add</i>
+              </ul>
+            </div>
+          </div>
+          <a id="submit" class="waves-effect waves-light btn">button</a>
+
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+$(document).ready(function() {
+  $('select').material_select();
+});
+</script>
+<script type="text/javascript" src="assets/materialize/js/materialize.min.js"></script>
+<script type="text/javascript" src="assets/js/main.js"></script>
+<script type="text/javascript" src="assets/js/add.js"></script>
+</body>
+</html>

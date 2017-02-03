@@ -1,0 +1,171 @@
+html,
+body {
+  background: #efefef;
+}
+#logo {
+  height: 100%;
+}
+
+#head {
+  background: #f9b74a;
+}
+
+#banner {
+  height: 350px;
+  background-image: url(http://www.hotelmanagementtutorial.com/wp-content/uploads/2013/07/How-to-Rrecognize-Restaurant-Terms.jpg);
+  /*background-image: url(http://www.hotelmanagementtutorial.com/wp-content/uploads/2013/07/How-to-Rrecognize-Restaurant-Terms.jpg);*/
+  background-size: cover;
+  background-position-y: 50%;
+}
+.light,
+.dark {
+  width: 50%;
+  height: 100%;
+  position: absolute;
+  /*float:left;*/
+}
+
+.light {
+  background: #f7a724;
+  margin-left: 50%;
+}
+
+.dark {
+  background: #f37E16;
+}
+#searchContainer {
+  height: 80px;
+  position: relative;
+  display: block;
+  top: calc(50% - 40px);
+  align-items: center;
+  margin: auto;
+  width: 30%;
+  background: rgba(255, 255, 255, 0.29);
+}
+
+#container {
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 50px;
+}
+
+.card-image span {
+  background: rgba(255, 255, 255, 0.38) !important;
+  width: 100% !important;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  white-space: nowrap;
+  width: 900px;
+  overflow-x: auto;
+  background-color: #ddd;
+}
+
+ul  li {
+  display: inline;
+  width: 150px;
+  height: 150px;
+}
+
+/* AUTOCOMPLETE */
+.autocomplete-content {
+  position: absolute;
+  background: #383838;
+  margin-top: -.9rem;
+  z-index: 999;
+}
+#searchContainer .State {
+  top: 10px !important;
+}
+
+.autocomplete-content li {
+  clear: both;
+  color: rgba(0, 0, 0, 0.87);
+  cursor: pointer;
+  line-height: 0;
+  width: 100%;
+  text-align: left;
+  text-transform: none;
+  padding: 10px;
+}
+
+.autocomplete-content li > span {
+  color: #ffa726;
+  font-size: .9rem;
+  padding: 1.2rem;
+  display: block;
+}
+
+.autocomplete-content li > span .highlight {
+  color: #000000;
+}
+
+.autocomplete-content li img {
+  height: 52px;
+  width: 52px;
+  padding: 5px;
+  margin: 0 15px;
+}
+
+.autocomplete-content li:hover {
+  background: #eee;
+  cursor: pointer;
+}
+
+.autocomplete-content > li:hover {
+  background: #292929;
+}
+.autocomplete-option {
+  height: 50px;
+}
+
+
+
+/* CREATE */
+#create {
+  background: white;
+  padding: 10%;
+  margin-right: 30%;
+}
+
+.btn input {
+  margin-bottom: 25px;
+  filter: alpha(opacity=0);
+  height: 45px;
+  top: inherit !important;
+}
+
+#categories  .card-image>img {
+  height: 300px;
+  object-fit: cover;
+}
+
+#loader {
+  display: none;
+  margin: 0 auto;
+}
+
+#ingredients ul{
+  padding: 0;
+}
+
+#ingredients ul input {
+  border-right: 1px solid black;
+}
+
+#ingredients i.material-icons {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 45px;
+}
+
+#ingredients ul li{
+  width: 100%;
+  height: inherit;
+  display: block;
+}
