@@ -1,0 +1,25 @@
+/*create recette*/
+{
+	recette: {
+		nbrPersonne: 4,
+		preparationTime: 45,
+		instruction: "coucou voici la recette"
+	},
+	ingredients: [
+		{
+			name: "oeuf",
+			amount: 5,
+			unit: ""
+		},
+		{
+			name: "farine",
+			amount: 500,
+			unit: "g"
+		},
+		{
+			name: "sucre",
+			amount: 1,
+			unit: "kg"
+		}
+	]
+}

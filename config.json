@@ -1,0 +1,7 @@
+{
+  "dbname": "marmiton",
+  "host": "localhost",
+  "user": "azureuser",
+  "password": "Etna2019",
+  "port": "5432"
+}

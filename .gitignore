@@ -1,0 +1,10 @@
+node_modules/
+.idea/
+npm-debug.log
+uploads
+*~
+\#*\#
+.nyc_output/
+coverage/
+swagger-ui-master.tar.gz
+swagger-ui-master/
