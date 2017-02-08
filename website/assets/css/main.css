@@ -7,13 +7,14 @@ body {
 }
 
 #head {
+  height: 70px;
   background: #f9b74a;
 }
 
 #banner {
   height: 350px;
-  background-image: url(http://www.hotelmanagementtutorial.com/wp-content/uploads/2013/07/How-to-Rrecognize-Restaurant-Terms.jpg);
-  /*background-image: url(http://www.hotelmanagementtutorial.com/wp-content/uploads/2013/07/How-to-Rrecognize-Restaurant-Terms.jpg);*/
+  background-image: url('http://www.hotelmanagementtutorial.com/wp-content/uploads/2013/07/How-to-Rrecognize-Restaurant-Terms.jpg');
+  /*background-image: url('http://www.hotelmanagementtutorial.com/wp-content/uploads/2013/07/How-to-Rrecognize-Restaurant-Terms.jpg');*/
   background-size: cover;
   background-position-y: 50%;
 }
@@ -168,4 +169,104 @@ ul  li {
   width: 100%;
   height: inherit;
   display: block;
+}
+
+
+/* sidebar button */
+
+.nav-wrapper > .dark {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+#sidebar-button {
+  margin: 0;
+  padding-left: 15px;
+  height: 70px;
+  width: 70px;
+  cursor: pointer;
+  z-index: 999;
+  transition: .4s;
+}
+
+#sidebar-button > .button-bar {
+  height: 7px;
+  width: 100%;
+  margin-top: 12px;
+  background: #000;
+  transition: .4s;
+}
+
+#sidebar-button.active > .button-bar:nth-child(1) {
+  transform: rotate(-45deg);
+  transform-origin: right;
+}
+#sidebar-button.active > .button-bar:nth-child(2) {
+  opacity: 0;
+}
+#sidebar-button.active > .button-bar:nth-child(3) {
+  transform: rotate(45deg);
+  transform-origin: right;
+}
+
+
+#sidebar {
+  position: fixed;
+  height: 100%;
+  width: calc(100% / 4);
+  margin-left: calc(-100% / 4);
+  padding-top: 70px;
+  background: grey;
+  z-index: 99;
+  transition: .4s;
+}
+
+#sidebar-veil {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: #000;
+  opacity: 0;
+  transition: .4s;
+  z-index: 98;
+
+  visibility: hidden;
+}
+
+#sidebar > .sidebar-list {
+  width: 100%;
+  height: 100%;
+}
+
+#sidebar > .sidebar-list > .sidebar-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 80px;
+  font-size: 28px;
+  font-weight: 700;
+  border-left: 7px solid transparent;
+  cursor: pointer;
+  transition: .4s;
+}
+
+#sidebar > .sidebar-list > .sidebar-item:focus,
+#sidebar > .sidebar-list > .sidebar-item:hover {
+  border-left: 7px solid #000;
+  color: #000;
+}
+
+#sidebar.active {
+  margin-left: 0;
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2)
+}
+
+#sidebar.active > #sidebar-veil {
+  visibility: visible;
+  opacity: .4;
+  margin-left: calc(100% / 4);
 }

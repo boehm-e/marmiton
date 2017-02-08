@@ -8,12 +8,28 @@
 </head>
 
 <body>
+  <nav id="sidebar">
+    <div id="sidebar-veil"></div>
+    <ul class="sidebar-list">
+      <li class="sidebar-item" onclick="location.href='add.html'"> Ajouter une recette !</li>
+      <li class="sidebar-item"> voir mes recettes ... </li>
+      <li class="sidebar-item"> À propos ... </li>
+
+    </ul>
+  </nav>
   <nav id="head">
     <div class="nav-wrapper">
-      <div class="dark"> </div>
-      <div class="light"> </div>
+      <div class="dark">
+	<div id="sidebar-button" onclick="this.toogleClass('active');document.getElementById('sidebar').toogleClass('active')">
+	  <div class="button-bar"></div>
+	  <div class="button-bar"></div>
+	  <div class="button-bar"></div>
+	</div>
+      </div>
+      <div class="light">
+      </div>
       <a href="#!" class="brand-logo center">
-        <img id="logo" src="assets/images/hamburger.png" lass="brand-logo">
+        <img id="logo" src="assets/images/hamburger.png" class="brand-logo">
       </a>
       <ul class="left hide-on-med-and-down">
       </ul>
@@ -36,18 +52,8 @@
     </div>
     <div id="categories" class="row">
       <!-- LOADER -->
-      <div id="loader" class="preloader-wrapper big active">
-        <div class="spinner-layer spinner-blue-only">
-          <div class="circle-clipper left">
-            <div class="circle"></div>
-          </div><div class="gap-patch">
-            <div class="circle"></div>
-          </div><div class="circle-clipper right">
-            <div class="circle"></div>
-          </div>
-        </div>
-        <!-- END LOADER -->
-      </div>
+      <div id="loader" class="preloader-wrapper big active"><div class="spinner-layer spinner-blue-only"><div class="circle-clipper left"><div class="circle"></div></div><div class="gap-patch"><div class="circle"></div></div><div class="circle-clipper right"><div class="circle"></div></div></div></div>
+      <!-- END LOADER -->
 
     </div>
   </div>

@@ -70,7 +70,7 @@ $(document).ready(function() {
       processData: false,
       contentType: false,
       success: function (data) {
-        Materialize.toast('Recette enregistree avec success !', 4000)
+          Materialize.toast('Recette enregistree avec success !', 4000);
       }
     });
   }

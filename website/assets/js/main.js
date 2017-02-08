@@ -1,3 +1,34 @@
+HTMLElement.prototype.removeClass = function(classToRemove) {
+    var split = this.className.split(" ");
+    split.splice(split.indexOf(classToRemove), 1).join(" ");
+    this.className = split;
+};
+
+HTMLElement.prototype.addClass = function(classToAdd) {
+    if (!this.hasClass(classToAdd))
+	this.className += " " + classToAdd;
+};
+
+HTMLElement.prototype.hasClass = function(classInQuestion) {
+    return this.className.indexOf(classInQuestion) != -1;
+};
+
+HTMLElement.prototype.toogleClass = function(className) {
+    if (this.hasClass(className))
+	this.removeClass(className);
+    else
+	this.addClass(className);
+};
+
+HTMLElement.prototype.remove = function() {
+    this.parentNode.removeChild(this);
+};
+
+
+
+
+
+
 function bests() {
   for (var i = 0; i < 3; i++) {
     $('#best').append(`
