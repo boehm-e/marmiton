@@ -25,9 +25,42 @@ HTMLElement.prototype.remove = function() {
 };
 
 
+var xhrRequest = {
+    GET: function(obj, callback) {
+	var req = new XMLHttpRequest();
+	req.open('GET', obj.url, true);
+	req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	req.onreadystatechange = function(e) {
+	    console.log(e);
+	    if (req.readyState == 4) {
+		callback({event: e, responseText: req.responseText, status: req.status, xhr: req});
+	    }
+	};
+	req.send();
+    },
+
+    POST: function(obj, callback) {
+	var fd = new FormData();
+	if (obj.jsonParams)
+	    Object.keys(obj.jsonParams).forEach(function(key) {
+		fd.append(key, obj.jsonParams[key]);
+	    });
+	var req = new XMLHttpRequest();
+	req.open('POST', obj.url, true);
+	req.onreadystatechange = function(e) {
+	    if (req.readyState == 4)
+		callback({event: e, responseText: req.responseText, status: req.status, xhr: req});
+	};
+	req.send(fd);
+    }
+};
+
+
 var SIDEBAR = document.getElementById('sidebar');
 var SEARCH = document.getElementById('autocompleteState');
+var LOADER = document.getElementById('loader');
 var C_autocompleteOption = document.getElementsByClassName('autocomplete-option');
+var C_autocompleteContent = document.getElementsByClassName('autocomplete-content');
 
 
 
