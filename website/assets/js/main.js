@@ -25,7 +25,9 @@ HTMLElement.prototype.remove = function() {
 };
 
 
-
+var SIDEBAR = document.getElementById('sidebar');
+var SEARCH = document.getElementById('autocompleteState');
+var C_autocompleteOption = document.getElementsByClassName('autocomplete-option');
 
 
 

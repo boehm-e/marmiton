@@ -1,48 +1,54 @@
 // Perform search
-var $input = $("#autocompleteState");
-function updateSearch(data) {
-  if ($input.hasClass('autocomplete')) {
-    var $array = data;
-    $inputDiv = $input.closest('.input-field'); // Div to append on
-    if ($array !== '') {
-      var $html = '<ul class="autocomplete-content hide">';
 
-      for (var i = 0; i < $array.length; i++) {
-        if ($array[i]['path'] !== '' && $array[i]['path'] !== undefined && $array[i]['path'] !== null && $array[i]['class'] !== undefined && $array[i]['class'] !== '') {
-          $html += '<li class="autocomplete-option"><img src="' + $array[i]['path'] + '" class="' + $array[i]['class'] + '"><span>' + $array[i]['value'] + '</span></li>';
-        } else {
-          $html += '<li class="autocomplete-option"><span>' + $array[i]['value'] + '</span></li>';
-        }
-      }
-      $html += '</ul>';
-      $inputDiv.append($html);
-      function highlight(string) {
-        $('.autocomplete-content li').each(function() {
-          var matchStart = $(this).text().toLowerCase().indexOf("" + string.toLowerCase() + ""),
-          matchEnd = matchStart + string.length - 1,
-          beforeMatch = $(this).text().slice(0, matchStart),
-          matchText = $(this).text().slice(matchStart, matchEnd + 1),
-          afterMatch = $(this).text().slice(matchEnd + 1);
-          $(this).html("<span>" + beforeMatch + "<span class='highlight'>" + matchText + "</span>" + afterMatch + "</span>");
-        });
-      }
-      $('.autocomplete-option').click(function() {
-        $input.val($(this).text().trim());
-        $('.autocomplete-option').addClass('hide');
-      });
+
+function updateSearch(data) {
+    console.log(data);
+    if (SEARCH.hasClass('autocomplete') && Array.isArray(data)) {
+	var inputContainer = SEARCH.parentNode;
+	var ul = document.createElement('ul'); //'<ul class="autocomplete-content hide">';
+	var li = data.map(function(el, i) {
+	    return ['', undefined, null].filter(function(no) {return no == el.path || no == el.class;}) == 0
+		? '<li class="autocomplete-option"><img src="' + el.path + '" class="' + el.class + '"><span>' + el.value + '</span></li>'
+		: '<li class="autocomplete-option"><span>' + el.value + '</span></li>';
+	}).join('');
+	ul.className = 'autocomplete-content hide';
+	ul.innerHTML = li;
+	inputContainer.appendChild(ul);
+
+	function highlight(string) {
+	    Array.from(document.querySelectorAll('.autocomplete-content li')).forEach(function(li) {
+		var matchStart = li.textContent.toLowerCase().indexOf("" + string.toLowerCase() + ""),
+		    matchEnd = matchStart + string.length - 1,
+		    beforeMatch = li.textContent.slice(0, matchStart),
+		    matchText = li.textContent.slice(matchStart, matchEnd + 1),
+		    afterMatch = li.textContent.slice(matchEnd + 1);
+		li.innerHTML = "<span>" + beforeMatch + "<span class='highlight'>" + matchText + "</span>" + afterMatch + "</span>";
+	    });
+	}
+
+	Array.from(C_autocompleteOption).forEach(function (el) {
+	    el.onclick = function(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		SEARCH.value = el.textContent.trim();
+		Array.from(C_autocompleteOption).forEach(function (el) {
+		    el.addClass('hide');
+		});
+	    };
+	});
+	return true;
     } else {
-      return false;
+	return false;
     }
-  }
 }
 
 var requests = [];
 // call api
-$(document).on('keyup', $input, function() {
+$(document).on('keyup', SEARCH, function() {
   $("#loader").css('display', 'block');
-  var $val = $input.val().trim(),
+  var $val = SEARCH.value.trim(),
   $select = $('.autocomplete-content');
-  $select.css('width',$input.width());
+  $select.css('width',SEARCH.offsetWidth);
   if ($val != '' && $('#autocompleteState').is(":focus")) {
     req = $.get( "../API/index.php?controller=recettes&action=search&q="+$val, function( data ) {
       var res = JSON.parse(data);
