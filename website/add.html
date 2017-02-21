@@ -8,8 +8,24 @@
 </head>
 
 <body>
+  <nav id="sidebar">
+    <div id="sidebar-veil"></div>
+    <ul class="sidebar-list">
+      <li class="sidebar-item" onclick="location.href='add.html'"> Ajouter une recette !</li>
+      <li class="sidebar-item"> voir mes recettes ... </li>
+      <li class="sidebar-item"> À propos ... </li>
+    </ul>
+  </nav>
   <nav id="head">
     <div class="nav-wrapper">
+      <div class="dark">
+	<div id="sidebar-button" onclick="this.toogleClass('active');document.getElementById('sidebar').toogleClass('active')">
+	  <div class="button-bar"></div>
+	  <div class="button-bar"></div>
+	  <div class="button-bar"></div>
+	</div>
+      </div>
+
       <a href="index.html" class="brand-logo center">
         <img id="logo" src="assets/images/hamburger.png" lass="brand-logo">
       </a>
@@ -52,16 +68,20 @@
           </div>
 
           <!-- INSTRUCTIONS -->
-          <div class="input-field col s12">
-            <textarea id="instruction" class="materialize-textarea"></textarea>
-            <label for="instruction">Instructions</label>
+          <div class="input-field col s12" id="instructions">
+            <div class="row">
+              <ul class="collection with-header col s12">
+                <li class="collection-header"><h4>Instructions</h4></li>
+                <i class="material-icons plus">add</i>
+              </ul>
+            </div>
           </div>
 
           <!-- PHOTO -->
           <div class="input-field col s12">
             <div class="file-field input-field">
               <div class="btn">
-                <span>File</span>
+                <span>Upload a Picture</span>
                 <input id="picture" type="file">
               </div>
               <div class="file-path-wrapper">
@@ -79,7 +99,7 @@
               </ul>
             </div>
           </div>
-          <a id="submit" class="waves-effect waves-light btn">button</a>
+          <a id="submit" class="waves-effect waves-light btn">Valider</a>
 
 
         </div>

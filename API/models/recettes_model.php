@@ -23,6 +23,8 @@ class Recettes {
   public static function create($recetteObj, $picture) {
     $db = Db::getInstance();
 
+    // instructions !!!
+
     // CREATE RECETTE;
     $recette = $recetteObj->recette;
     $req = $db->prepare("INSERT INTO recettes(picture, nbrPersonnes, perparationTime, instruction, name, category) VALUES(:picture, :nbrPersonne, :preparationTime, :instruction, :name, :category)",  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
