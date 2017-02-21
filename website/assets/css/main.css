@@ -174,12 +174,35 @@ ul  li {
   border-right: 1px solid black;
 }
 
-#ingredients i.material-icons {
+#ingredients i.material-icons.plus {
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
   height: 45px;
+  cursor: pointer;
+  transition: .4s;
+}
+
+#ingredients i.material-icons.plus:hover {
+  background: #555;
+}
+
+
+#ingredients i.material-icons.delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+  width: 30px;
+  margin-top: 10px;
+  padding: 5px;
+  cursor: pointer;
+  transition: .4s;
+}
+
+#ingredients i.material-icons.delete:hover {
+  transform: scale(1.2);
 }
 
 #ingredients ul li{
