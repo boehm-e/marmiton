@@ -1,6 +1,5 @@
 // Perform search
 
-
 function updateSearch(data) { // to much ul, find the moment when the ul are to be removed !
     if (SEARCH.hasClass('autocomplete') && Array.isArray(data)) {
 	var inputContainer = SEARCH.parentNode;
@@ -10,9 +9,12 @@ function updateSearch(data) { // to much ul, find the moment when the ul are to 
 		? '<li class="autocomplete-option"><img src="' + el.path + '" class="' + el.class + '"><span>' + el.value + '</span></li>'
 		: '<li class="autocomplete-option"><span>' + el.value + '</span></li>';
 	}).join('');
-	ul.className = 'autocomplete-content hide';
+	Array.from(inputContainer.getElementsByTagName('ul')).forEach(function(_ul) {
+	    _ul.remove();
+	});
 	ul.innerHTML = li;
 	inputContainer.appendChild(ul);
+	console.log(ul);
 
 	function highlight(string) {
 	    Array.from(document.querySelectorAll('.autocomplete-content li')).forEach(function(li) {
@@ -51,12 +53,12 @@ SEARCH.onkeyup = function() {
     });
     if (val != '' && document.activeElement == SEARCH) {
 	var req = xhrRequest.GET({url: "../API/index.php?controller=recettes&action=search&q="+val}, function(data) {
+	    console.log(data.responseText);
 	    var res = JSON.parse(data.responseText);
 	    categories(res);
 	    updateSearch(res);
 	    Array.from(C_autocompleteContent).forEach(function(el) {
 		Array.from(el.getElementsByTagName('li')).forEach(function(li) {
-		    console.log(li);
 		    li.addClass('hide');
 		});
 	    });

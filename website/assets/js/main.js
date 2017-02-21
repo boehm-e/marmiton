@@ -31,7 +31,6 @@ var xhrRequest = {
 	req.open('GET', obj.url, true);
 	req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 	req.onreadystatechange = function(e) {
-	    console.log(e);
 	    if (req.readyState == 4) {
 		callback({event: e, responseText: req.responseText, status: req.status, xhr: req});
 	    }
@@ -81,16 +80,14 @@ function bests() {
       </div>
       </div>
       </div>
-      </div>
-      `
-    )
+      </div>`);
   }
 }
 
 function categories(array) {
-  $('#categories').empty()
-  for (var i = 0; i < array.length; i++) {
-    $('#categories').append(`
+    $('#categories').empty();
+    for (var i = 0; i < array.length; i++) {
+	$('#categories').append(`
       <div class="col s12 m3">
       <div class="card">
       <div class="card-image">
@@ -99,10 +96,8 @@ function categories(array) {
       <a href="#">${array[i].name}</a>
       </div>
       </div>
-      </div>
-      `
-    )
-  }
+      </div>`);
+    }
 }
 
 bests();
