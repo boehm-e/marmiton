@@ -7,6 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js"></script>
+  <script src="assets/js/rating.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+  <link rel="stylesheet" href="./assets/css/fontawesome-stars.css">
 </head>
 
 <body>
@@ -37,8 +40,15 @@
     </div>
   </nav>
 
+  <!-- INGREDIENTS -->
+  <div id="ingredients">
+    <ul class="collection with-header">
+      <li class="collection-header"><h4>Ingredients</h4></li>
+    </ul>
+  </div>
+
+  <!-- RECETTE -->
   <div id="recette_container">
-    <!-- RECETTE -->
     <div id="recette">
       <div class="carousel carousel-slider center" data-indicators="true" style="height: calc(100% -70px) !important" id="steps_container">
         <div class="carousel-fixed-item left">
@@ -49,7 +59,67 @@
         </div>
       </div>
     </div>
+  </div>
 
+  <!-- COMMENTAIRES -->
+
+  <div id="commentaires_container">
+    <ul class="collection">
+      <li class="collection-item avatar">
+        <i class="material-icons circle">account_circle</i>
+        <span class="title">Title</span>
+        <p>First Line <br>
+          Second Line
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      </li>
+      <li class="collection-item avatar">
+        <i class="material-icons circle green">insert_chart</i>
+        <span class="title">Title</span>
+        <p>First Line <br>
+          Second Line
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      </li>
+      <li class="collection-item avatar">
+        <i class="material-icons circle red">play_arrow</i>
+        <span class="title">Title</span>
+        <p>First Line <br>
+          Second Line
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      </li>
+    </ul>
+  </div>
+
+  <div id="your_comment">
+    <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <input autocomplete="off" placeholder="Placeholder" id="first_name" type="text" class="validate">
+            <label for="first_name">Prenom</label>
+          </div>
+          <div class="input-field col s6">
+            <input autocomplete="off" id="last_name" type="text" class="validate">
+            <label for="last_name">Nom</label>
+          </div>
+        </div>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <textarea id="comment" class="materialize-textarea"></textarea>
+                <label for="comment">Votre commentaire</label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div id="row">
+          <a id="send_comment" class='dropdown-button btn right'> Envoyer! </a>
+        </div>
+      </form>
+    </div>
   </div>
 
   <script type="text/javascript" src="assets/materialize/js/materialize.min.js"></script>

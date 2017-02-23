@@ -9,3 +9,44 @@
 .carousel-fixed-item {
   top: calc(50% - 18px)
 }
+
+#ingredients {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+#ingredients > ul {
+  margin: 0;
+  width: 100%;
+  border: 0px;
+}
+
+#ingredients > ul > li {
+  font-size: 20px;
+}
+
+
+#commentaires_container {
+  width: 100%;
+}
+
+ul > li {
+  display: block;
+  width: 100%;
+}
+ul {
+  width: 100%;
+}
+
+
+.material-icons.circle {
+  font-size: 30px !important;
+}
+
+#your_comment {
+  padding-left: 10%;
+  padding-right: 10%;
+  background: white;
+  padding-top: 5%;
+}

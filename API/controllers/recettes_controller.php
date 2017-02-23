@@ -1,5 +1,6 @@
 <?php
 class RecettesController {
+
     public function liste() {
         $dbs = Recettes::liste();
         echo $dbs;
@@ -11,6 +12,15 @@ class RecettesController {
         $dbs = Recettes::create($obj);
         echo($dbs);
     }
+    public function comment() {
+        // $txt = '{"recette":{"nbrPersonne":4,"category": 1, "name": "tarte aux pommes", "preparationTime":45,"instruction":"coucou voici la recette"},"ingredients":[{"name":"oeuf","amount":5,"unit":""},{"name":"farine","amount":500,"unit":"g"},{"name":"sucre","amount":1,"unit":"kg"}]}';
+        $comment = $_POST['comment'];
+        $id = $_POST['id'];
+        $author = $_POST['author'];
+        $rate = $_POST['rate'];
+        $dbs = Recettes::comment($id, $comment, $author, $rate);
+        echo($dbs);
+    }
     public function delete() {
         $id = $_POST['id'];
         Recettes::delete($id);
@@ -20,6 +30,17 @@ class RecettesController {
         // $category = $_GET['category'];
         $category = "";
         $obj = Recettes::search($q, $category);
+        echo $obj;
+    }
+
+    public function getCategory() {
+        $obj = Recettes::getCategory();
+        echo $obj;
+    }
+
+    public function getById() {
+        $recetteId = $_POST['id'];
+        $obj = Recettes::getById($recetteId);
         echo $obj;
     }
 
