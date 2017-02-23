@@ -90,18 +90,18 @@ function buildRecette() {
 }
 
 function send() {
-  var data = new FormData();
-  data.append("file_upload", PICTURE.files[0]);
-  data.append("recette", JSON.stringify(buildRecette()));
-  console.log(buildRecette())
-  $.ajax({
-    url: "../API/index.php?controller=recettes&action=upload",
-    type: "POST",
-    data: data,
-    processData: false,
-    contentType: false,
-    success: function (data) {
-      Materialize.toast('Recette enregistree avec success !', 4000);
+    var data = new FormData();
+    data.append("file_upload", PICTURE.files[0]);
+    data.append("recette", JSON.stringify(buildRecette()));
+    $.ajax({
+	url: "../API/index.php?controller=recettes&action=upload",
+	type: "POST",
+	data: data,
+	processData: false,
+	contentType: false,
+	success: function (data) {
+	    Materialize.toast('Image enregistree avec success !', 4000);
+
     }
   });
 }
