@@ -12,7 +12,7 @@ function rate_recette() {
     data: {
       author: $('#first_name').val() + ' ' + $('#last_name').val(),
       comment: $('#comment').val(),
-      rate: 5,
+      rate: parseInt($("#getrate").val()),
       id: window.location.hash.replace('#', '')
     },
     success: function (data) {
@@ -66,41 +66,61 @@ function build_recette(data) {
 
 
     // COMMENTAIRES
+    var comments = JSON.parse(data.comments);
+    console.log(comments);
+    var comments_container = $("#commentaires_container>ul");
+    comments.forEach((comment, step) => {
+      console.log(comment);
+      var rtngs = '';
+      for(var i=0; i< parseInt(comment.rate); i++) {
+        rtngs += '<i class="material-icons">grade</i>'
+      }
+
+      comments_container.append(`
+        <li class="collection-item avatar">
+        <i class="material-icons circle">account_circle</i>
+        <span class="title">${comment.author}</span>
+        <p>${comment.comment}<br>
+        <a href="#!" class="secondary-content">${rtngs}
+        </a>
+        </li>
+        `)
+      })
 
 
 
 
 
 
-    $('.carousel.carousel-slider').carousel({full_width: true});
-  }
+      $('.carousel.carousel-slider').carousel({full_width: true});
+    }
 
 
 
-  function next() {
-    $('.carousel.carousel-slider').carousel("next");
-  }
+    function next() {
+      $('.carousel.carousel-slider').carousel("next");
+    }
 
-  function prev() {
-    $('.carousel.carousel-slider').carousel("prev");
-  }
-
-
+    function prev() {
+      $('.carousel.carousel-slider').carousel("prev");
+    }
 
 
 
 
-  if (annyang) {
-    annyang.setLanguage('fr-FR');
-    console.log("ANNYANG")
-    var commands = {
-      'suivant':   next(),
-      'precedent': prev()
-    };
-    annyang.addCommands(commands);
-    annyang.start();
 
 
-  } else {
-    console.log("NO ANNYANG");
-  }
+    if (annyang) {
+      annyang.setLanguage('fr-FR');
+      console.log("ANNYANG")
+      var commands = {
+        'suivant':   next(),
+        'precedent': prev()
+      };
+      annyang.addCommands(commands);
+      annyang.start();
+
+
+    } else {
+      console.log("NO ANNYANG");
+    }

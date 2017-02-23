@@ -56,6 +56,13 @@ class Recettes {
     $ingredients = $req->fetchAll(PDO::FETCH_ASSOC);
     $recette[0]["rating"] = $ingredients[0]["avg"];
 
+    // GET COMMENTS
+    $sql = "SELECT array_to_json(array_agg(comments.*)) AS comments FROM comments WHERE recetteId = :id;";
+    $req = $db->prepare($sql,  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $req->execute(array(':id' => $recetteId));
+    $ingredients = $req->fetchAll(PDO::FETCH_ASSOC);
+    $recette[0]["comments"] = $ingredients[0]["comments"];
+
 
     return json_encode($recette[0]);
   }
