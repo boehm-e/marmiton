@@ -44,17 +44,6 @@ class RecettesController {
         echo $obj;
     }
 
-    public function getCategory() {
-        $obj = Recettes::getCategory();
-        echo $obj;
-    }
-
-    public function getById() {
-        $recetteId = $_POST['id'];
-        $obj = Recettes::getById($recetteId);
-        echo $obj;
-    }
-
     public function getAll() {
         $all_recettes = Recettes::getAll();
 
@@ -64,7 +53,7 @@ class RecettesController {
 
     public function upload() {
         print_r($_POST);
-        if($_FILES['file_upload']['error'] > 0){
+        if($_FILES['file_upload']['error'] > 0) {
             die('An error ocurred when uploading.');
         }
 

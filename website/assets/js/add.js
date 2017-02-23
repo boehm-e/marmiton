@@ -89,19 +89,101 @@ function buildRecette() {
   return ret;
 }
 
+var similarityTreshHold = 0.8;
+
 function send() {
     var data = new FormData();
     data.append("file_upload", PICTURE.files[0]);
     data.append("recette", JSON.stringify(buildRecette()));
-    $.ajax({
-	url: "../API/index.php?controller=recettes&action=upload",
-	type: "POST",
-	data: data,
-	processData: false,
-	contentType: false,
-	success: function (data) {
-	    Materialize.toast('Image enregistree avec success !', 4000);
 
+    $.ajax({
+	url: "../API/index.php?controller=recettes&action=getAll",
+	type: "GET",
+	success: function (recettes) {
+	    var currentRecette = buildRecette();
+	    var currentInstructions = currentRecette.instructions;
+
+	    var cIns = currentInstructions
+		    .map(function(el) {return el.instruction;})
+		    .sort(function(a, b) {return a < b;});
+
+
+	    var matchInstructions = recettes.filter(function(recette) {
+		var ins = JSON.parse(recette.array_to_json)
+			.sort(function(a, b) {return a < b;});
+
+		var similarityTab = cIns.map(function(str1, i) {
+		    var str2 = ins[
+			ins.map(function(_str2, i) {
+			    var sim = similarity(str1, _str2);
+			    return {sim: sim, i: i};
+			}).sort(function(a, b) {return a.sim < b.sim;})[0].i
+		    ];
+		    return similarity(str1, str2);
+		});
+
+		return similarityTab.reduce(function(pv, cv) {return pv + cv;}, 0) > similarityTreshHold;
+	    });
+
+	    var matchTitle = recettes.filter(function(recette) {
+		return (similarity(recette.name, currentRecette.recette.name) > similarityTreshHold);
+	    });
+
+
+	    if (matchInstructions.length >= 1 || matchTitle.length >= 1)
+		Materialize.toast('Votre recette n\'est pas acceptee car une autre est trop similaire', 4000);
+
+	    $.ajax({
+		url: "../API/index.php?controller=recettes&action=upload",
+		type: "POST",
+		data: data,
+		processData: false,
+		contentType: false,
+		success: function (data) {
+		    Materialize.toast('Image enregistree avec success !', 4000);
+
+		}
+	    });
+
+	}
+    });
+
+}
+
+
+
+function wordDistance(str1, str2) {
+    str1 = str1.toLowerCase();
+    str2 = str2.toLowerCase();
+
+    var costs = [];
+    for (var i = 0; i <= str1.length; i++) {
+	var lastValue = i;
+	for (var j = 0; j <= str2.length; j++) {
+	    if (i == 0)
+		costs[j] = j;
+	    else {
+		if (j > 0) {
+		    var newValue = costs[j - 1];
+		    if (str1.charAt(i - 1) != str2.charAt(j - 1))
+			newValue = Math.min(Math.min(newValue, lastValue), costs[j]) + 1;
+		    costs[j - 1] = lastValue;
+		    lastValue = newValue;
+		}
+	    }
+	}
+	if (i > 0)
+	    costs[str2.length] = lastValue;
     }
-  });
+    return costs[str2.length];
+}
+
+function similarity(str1, str2) {
+    var longer = str1;
+    var shorter = str2;
+    if (str1.length < str2.length) {
+	longer = str2;
+	shorter = str1;
+    }
+    return (longer.length == 0) ? 1.0 : (longer.length - wordDistance(longer, shorter)) / parseFloat(longer.length);
 }
