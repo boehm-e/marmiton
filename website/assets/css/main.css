@@ -13,8 +13,7 @@ body {
 
 #banner {
   height: 350px;
-  background-image: url('http://www.hotelmanagementtutorial.com/wp-content/uploads/2013/07/How-to-Rrecognize-Restaurant-Terms.jpg');
-  /*background-image: url('http://www.hotelmanagementtutorial.com/wp-content/uploads/2013/07/How-to-Rrecognize-Restaurant-Terms.jpg');*/
+  background-image: url('../images/resto.jpg');
   background-size: cover;
   background-position-y: 50%;
 }
@@ -42,7 +41,7 @@ body {
   align-items: center;
   margin: auto;
   width: 30%;
-  background: rgba(255, 255, 255, 0.29);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 #container {
