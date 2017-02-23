@@ -1,6 +1,6 @@
 <?php
 $controllers = array(
-  'recettes' => ['create', 'search', 'getCategory', 'upload', 'getById']
+  'recettes' => ['create', 'search', 'getCategory', 'upload', 'getById', 'comment']
 );
 
 if (array_key_exists($controller, $controllers)) {

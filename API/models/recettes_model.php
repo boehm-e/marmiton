@@ -11,6 +11,15 @@ class Recettes {
     $this->email     = $email;
   }
 
+  public static function comment($id, $comment, $author, $rate) {
+    $db = Db::getInstance();
+    $req = $db->prepare("INSERT INTO comments(author, comment, rate, recetteid) VALUES(:author, :comment, :rate, :recetteid);",  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $req->execute(array(':author' => $author, ':comment' => $comment, ':rate' => $rate, 'recetteid' => $id ));
+
+    return;
+  }
+
+
   public static function getCategory() {
     $db = Db::getInstance();
     $sql = "SELECT * FROM category";
@@ -23,11 +32,30 @@ class Recettes {
   public static function getById($recetteId) {
     $db = Db::getInstance();
 
+    // $recette = new stdClass();
+
     // GET RECETTE
     $sql = "SELECT recettes.*,  array_to_json(array_agg(instructions.content)) FROM recettes LEFT JOIN instructions ON instructions.recetteid = recettes.id WHERE recettes.id = :id GROUP BY recettes.id;";
     $req = $db->prepare($sql,  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $req->execute(array(':id' => $recetteId));
     $recette = $req->fetchAll(PDO::FETCH_ASSOC);
+
+    // print_r($recettes);
+
+    // GET INGREDIENTS
+    $sql = "SELECT array_to_json(array_agg(ingredients.*)) AS ingredient FROM ingredients WHERE ingredientId = :id;";
+    $req = $db->prepare($sql,  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $req->execute(array(':id' => $recetteId));
+    $ingredients = $req->fetchAll(PDO::FETCH_ASSOC);
+    $recette[0]["ingredients"] = $ingredients[0]["ingredient"];
+
+    // GET RATE
+    $sql = "SELECT AVG(rate) FROM comments WHERE recetteId = :id;";
+    $req = $db->prepare($sql,  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $req->execute(array(':id' => $recetteId));
+    $ingredients = $req->fetchAll(PDO::FETCH_ASSOC);
+    $recette[0]["rating"] = $ingredients[0]["avg"];
+
 
     return json_encode($recette[0]);
   }
