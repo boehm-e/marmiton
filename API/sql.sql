@@ -15,8 +15,14 @@ CREATE TABLE recettes (
   perparationTime int,
   instruction     TEXT,
   picture         VARCHAR(50),
-  category            int REFERENCES category(id),
+  category        int REFERENCES category(id),
   creation_date  timestamp without time zone default (now())
+);
+
+CREATE TABLE instructions (
+  id              serial primary key,
+  content         VARCHAR(500),
+  recetteId       int REFERENCES recettes(id)
 );
 
 CREATE TABLE ingredients (

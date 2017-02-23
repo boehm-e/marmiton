@@ -7,7 +7,6 @@ class RecettesController {
   public function create() {
     // $txt = '{"recette":{"nbrPersonne":4,"category": 1, "name": "tarte aux pommes", "preparationTime":45,"instruction":"coucou voici la recette"},"ingredients":[{"name":"oeuf","amount":5,"unit":""},{"name":"farine","amount":500,"unit":"g"},{"name":"sucre","amount":1,"unit":"kg"}]}';
     $txt = $_POST['recette'];
-    echo $txt;
     $obj = json_decode($txt);
     $dbs = Recettes::create($obj);
     echo($dbs);
@@ -18,13 +17,20 @@ class RecettesController {
   }
   public function search() {
     $q = $_GET['q'];
-    $category = $_GET['category'];
+    // $category = $_GET['category'];
+    $category = "";
     $obj = Recettes::search($q, $category);
     echo $obj;
   }
 
   public function getCategory() {
     $obj = Recettes::getCategory();
+    echo $obj;
+  }
+
+  public function getById() {
+    $recetteId = $_POST['id'];
+    $obj = Recettes::getById($recetteId);
     echo $obj;
   }
 
@@ -54,7 +60,7 @@ class RecettesController {
     }
 
     // Upload file
-    if(!move_uploaded_file($_FILES['file_upload']['tmp_name'], 'uploads/' . $_FILES['file_upload']['name'])){
+    if(!move_uploaded_file($_FILES['file_upload']['tmp_name'], '../uploads/' . $_FILES['file_upload']['name'])){
         die('Error uploading file - check destination is writeable.');
     } else {
       Recettes::create(json_decode($_POST['recette']), '/marmiton/uploads/' . $_FILES['file_upload']['name']);

@@ -1,0 +1,11 @@
+.carousel-slider {
+  height: calc(100% -70px) !important;
+}
+#steps_container {
+  width: 100%;
+  height: calc(100% - 70px) !important;
+}
+
+.carousel-fixed-item {
+  top: calc(50% - 18px)
+}

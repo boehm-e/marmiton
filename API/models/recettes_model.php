@@ -20,12 +20,25 @@ class Recettes {
     return json_encode($res);
   }
 
+  public static function getById($recetteId) {
+    $db = Db::getInstance();
+
+    // GET RECETTE
+    $sql = "SELECT recettes.*,  array_to_json(array_agg(instructions.content)) FROM recettes LEFT JOIN instructions ON instructions.recetteid = recettes.id WHERE recettes.id = :id GROUP BY recettes.id;";
+    $req = $db->prepare($sql,  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
+    $req->execute(array(':id' => $recetteId));
+    $recette = $req->fetchAll(PDO::FETCH_ASSOC);
+
+    return json_encode($recette[0]);
+  }
+
   public static function create($recetteObj, $picture) {
     $db = Db::getInstance();
 
-    // instructions !!!
+    // instructions && no preparationTime
 
     // CREATE RECETTE;
+
     $recette = $recetteObj->recette;
     $req = $db->prepare("INSERT INTO recettes(picture, nbrPersonnes, perparationTime, instruction, name, category) VALUES(:picture, :nbrPersonne, :preparationTime, :instruction, :name, :category)",  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     print_r($recette);
@@ -36,6 +49,11 @@ class Recettes {
     for ($i=0; isset($ingredients[$i]) ; $i++) {
       $req = $db->prepare("INSERT INTO ingredients(name, amount, unit, ingredientId) VALUES(:name, :amount, :unit, :ingredientId)");
       $req->execute(array(':name' => $ingredients[$i]->name, ':amount' => $ingredients[$i]->amount, ':unit' => $ingredients[$i]->unit, ':ingredientId' => $ingredientId));
+    }
+    $instructions = $recetteObj->instructions;
+    for ($i=0; isset($instructions[$i]) ; $i++) {
+      $req = $db->prepare("INSERT INTO instructions(content, recetteId) VALUES(:content, :recetteId)");
+      $req->execute(array(':content' => $instructions[$i]->instruction, ':recetteId' => $ingredientId));
     }
     return;
   }
@@ -53,7 +71,8 @@ class Recettes {
   public static function search($q, $category) {
     $db = Db::getInstance();
     $q = "%$q%";
-    $sql = "SELECT *, name AS value FROM (SELECT *, (name || instruction) AS tosearch FROM recettes) d WHERE d.tosearch LIKE :q";
+    // $sql = "SELECT *, name AS value FROM (SELECT *, (name || instruction) AS tosearch FROM recettes) d WHERE d.tosearch LIKE :q";
+    $sql = "SELECT * FROM recettes WHERE id IN (SELECT a.recetteid  FROM (SELECT recettes.name || instructions.content AS tosearch, * FROM recettes LEFT JOIN instructions ON instructions.recetteId = recettes.id) a WHERE a.tosearch LIKE :q GROUP BY a.recetteid)";
     $req = $db->prepare($sql,  array(PDO::ATTR_CURSOR => PDO::CURSOR_FWDONLY));
     $req->execute(array(':q' => $q));
     $res = $req->fetchAll(PDO::FETCH_ASSOC);

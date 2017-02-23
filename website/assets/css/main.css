@@ -88,6 +88,9 @@ ul  li {
   background: #383838;
   margin-top: -.9rem;
   z-index: 999;
+  width: 100%;
+  left: 0;
+  margin-top: -20px;
 }
 #searchContainer .State {
   top: 10px !important;
@@ -132,21 +135,21 @@ ul  li {
   background: #292929;
 }
 /* .autocomplete-option {
-   height: 40px;
-   display: block;
-   float: none;
-   width: 100%;
-   line-height: 30px;
-   padding: 5px 0px 5px 15px;
-   z-index: 999;
-   cursor: pointer;
-   transition: .4s;
-   }
-   .autocomplete-option:hover {
-   background: #555;
-   }
+height: 40px;
+display: block;
+float: none;
+width: 100%;
+line-height: 30px;
+padding: 5px 0px 5px 15px;
+z-index: 999;
+cursor: pointer;
+transition: .4s;
+}
+.autocomplete-option:hover {
+background: #555;
+}
 
- */
+*/
 /* CREATE */
 #create {
   background: white;
@@ -321,4 +324,24 @@ ul  li {
   visibility: visible;
   opacity: .4;
   margin-left: calc(100% / 4);
+}
+
+
+
+
+
+
+/*CAROUSSEL*/
+
+.indicators {
+  width: 100%;
+}
+.carousel-item .instruction {
+  height: calc(40%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 10%;
+  width: 90%;
+  font-size: 25px !important;
 }
